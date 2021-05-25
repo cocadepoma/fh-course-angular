@@ -1,0 +1,49 @@
+<app-loading *ngIf="loading"></app-loading>
+
+<div class="row m-5 align-items-center animated fadeIn" *ngIf="!loading">
+    <div class="col-6">
+        <img [src]="artista.images | noimage" class="img-thumbnail img-circle">
+    </div>
+    <div class="col-4">
+        <h3>{{ artista.name }}</h3>
+        <p>
+            Followers: {{artista.followers.total | number}}
+        </p>
+        <p>
+            <a class="green" [href]="artista.external_urls.spotify" target="_blank">
+                Ir a la página del artista
+            </a>
+        </p>
+    </div>
+    <div class="col-2 text-right">
+        <button routerLink="/home" class="btn btn-outline-danger">Volver</button>
+    </div>
+</div>
+<div class="row m-5">
+    <div class="col ">
+        <h5 class="text-center"> {{artista.name}} Top 10 tracks</h5>
+        <table class="table text-white tabla">
+            <tr>
+                <th>Foto</th>
+                <th>Albúm</th>
+                <th>Canción</th>
+                <th>Vista Previa</th>
+            </tr>
+            <tbody class="gris">
+                <tr *ngFor="let track of topTracks">
+                    <td>
+                        <img [src]="track.album.images | noimage" class="img-thumb">
+                    </td>
+                    <td>{{track.album.name}}</td>
+                    <td>{{track.name}}</td>
+                    <td>
+                        <iframe [src]="track.id | domseguro:'https://open.spotify.com/embed/track/'" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                        <!-- <audio [src]="track.preview_url" controls></audio> -->
+
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<app-navbar></app-navbar>
+<div class="container animated fadeInLeft fast mt-5">
+    <h4>Formularios <small> Reactivos</small></h4>
+    <hr>
+    <form #form="ngForm" autocomplete="off" (ngSubmit)="guardar(form)">
+
+        <div>
+
+            <div class="form-group row">
+                <label class="col-2 col-form-label">Nombre</label>
+                <div class="col-8">
+
+                    <input [ngModel]="usuario.nombre" name="nombre" #nombre="ngModel" [class.is-invalid]="nombre.invalid && nombre.touched" [class.is-valid]="nombre.valid && nombre.touched" ngModel required minlength="5" class="form-control is-invalid" type="text" placeholder="Nombre">
+                    <small *ngIf="nombre.invalid && nombre.touched" class="form-text text-danger">* Introduzca al menos 5 caracteres</small>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-2 col-form-label">Apellido</label>
+                <div class="col-8">
+                    <input [ngModel]="usuario.apellido" required minlength="6" ngModel name="apellido" #apellido="ngModel" [class.is-invalid]="apellido.invalid && apellido.touched" [class.is-valid]="apellido.valid && apellido.touched" class="form-control" type="text" placeholder="Apellido">
+                    <small *ngIf="apellido.invalid && apellido.touched" class="form-text text-danger">* Introduzca al menos 6 caracteres</small>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-2 col-form-label">Correo</label>
+                <div class="col-8">
+
+                    <input [ngModel]="usuario.email" #correo="ngModel" ngModel name="correo" required [class.is-invalid]="correo.invalid && correo.touched" [class.is-valid]="correo.valid && correo.touched" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control"
+                        type="email" placeholder="Correo electrónico">
+                    <small *ngIf="correo.invalid && correo.touched" class="form-text text-danger">* Introduzca un email válido</small>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-2 col-form-label">País</label>
+                <div class="col-8">
+                    <select #pais="ngModel" [class.is-valid]="pais.touched && pais.valid" [class.is-invalid]="pais.touched && pais.invalid" [disabled]="paises.length === 0" class="form-control" name="pais" [ngModel]="usuario.pais" required> 
+
+                        <option *ngFor="let pais of paises" value="{{pais.codigo}}">
+                            {{ pais.nombre }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-2 col-form-label">País</label>
+                <div class="col-8">
+
+                    <div class="form-check form-check-inline">
+                        <input [class.is-invalid]="genero.invalid && genero.touched" #genero="ngModel" required [ngModel]="usuario.genero" name="genero" value="M" type="radio" class="form-check-input">
+                        <label class="form-check-label">Masculino</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <input [class.is-invalid]="genero.invalid && genero.touched" #genero="ngModel" required [ngModel]="usuario.genero" name="genero" value="F" type="radio" class="form-check-input">
+                        <label class="form-check-label">Femenino</label>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+            <label class="col-2 col-form-label">&nbsp;</label>
+            <div class="input-group col-md-8">
+                <button type="submit" class="btn btn-outline-primary btn-block">
+            Guardar
+          </button>
+            </div>
+        </div>
+
+
+
+
+    </form>
+</div>
